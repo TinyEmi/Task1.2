@@ -35,11 +35,11 @@
             z-index: 1000;
         }
         .info-panel h4 {
-            font-size: 20px; /* Increased font size */
+            font-size: 20px; 
             margin: 0;
         }
         .leaflet-interactive {
-            stroke: none; /* Removes the stroke (outline) */
+            stroke: none; 
         }
     </style>
 </head>
@@ -53,9 +53,9 @@
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <script>
         const map = L.map('map', {
-            maxBounds: [[-90, -180], [90, 180]], // Limit panning to the world's extents
+            maxBounds: [[-90, -180], [90, 180]], 
             minZoom: 2
-        }).setView([0, 0], 2); // Center on the world and set zoom level to 2
+        }).setView([0, 0], 2); 
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -66,7 +66,7 @@
             chunkedLoading: true,
             iconCreateFunction: function(cluster) {
                 const childCount = cluster.getChildCount();
-                const size = Math.min(40 + (childCount / 100), 60); // Gradually increase size
+                const size = Math.min(40 + (childCount / 100), 60); 
                 const color = getColorFromGradient(childCount);
                 return new L.DivIcon({
                     html: `<div class="marker-cluster" style="background-color:${color}; width:${size}px; height:${size}px; line-height:${size}px;">${childCount}</div>`,
@@ -99,7 +99,7 @@
                     totalSightings++;
                     var marker = L.circleMarker([d.latitude, d.longitude], {
                         radius: 8,
-                        fillColor: getColorFromGradient(1), // Consistent purple for smallest markers
+                        fillColor: getColorFromGradient(1), 
                         color: "#000",
                         weight: 1,
                         opacity: 0.8,
@@ -117,13 +117,12 @@
         }
 
         function getColorFromGradient(count) {
-            // Adjusted to start the gradient transition after a certain threshold
             if (count < 10) {
                 return '#8661ff'; // Purple for small counts
             }
             const factor = (count - 10) / (1000 - 10); // Normalize for a smooth gradient after 10 counts
-            const startColor = [134, 97, 255]; // RGB for #8661ff
-            const endColor = [129, 255, 97]; // RGB for #81ff61
+            const startColor = [134, 97, 255]; 
+            const endColor = [129, 255, 97]; 
             const interpolatedColor = startColor.map((component, index) =>
                 Math.round(component + factor * (endColor[index] - component))
             );
